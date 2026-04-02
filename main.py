@@ -18,5 +18,15 @@ def get_labels_index (labels):
     return labels_index
 
 
+
+def get_prior(label_indexes):
+    prior = {label: len(indexes) for label, indexes in label_indexes.items()}
+    total = sum(prior.values())
+
+    for label in prior:
+        prior[label] /= total
+    return prior
+
 label_indexes = get_labels_index(Y_train)
-print(f"label indexes: {label_indexes}")
+prior = get_prior(label_indexes)
+print(f"Prior: {prior}")
